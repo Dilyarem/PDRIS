@@ -1,3 +1,4 @@
+#!/bin/bash
 FORMAT="timestamp;all_memory;free_memory;%usaged"
 
 get_info(){
