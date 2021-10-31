@@ -1,6 +1,6 @@
 #!/bin/bash
-dir=$(echo $1 | grep -o '[^\/]*' | tail -1)
+dir="$(dirname $0)/$(echo $1 | grep -o '[^\/]*' | tail -1)"
 rm -f -r $dir
-git clone $1
+git clone $1 $dir
 cd $dir
 git diff --name-only $2..$3 > "../diff.txt"
