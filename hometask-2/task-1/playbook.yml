@@ -1,0 +1,64 @@
+---
+- name: nginx_setup
+  hosts: all
+  become: yes
+  
+  tasks:
+    - name: system os detection 
+      debug: var=ansible_os_family
+      
+    - name: gather package info
+      package_facts:
+      
+    - name: gather servises' state
+      service_facts:
+      
+    - name: copy server config
+      copy:
+        src: nginx/nginx.conf
+        dest: /etc/nginx/conf.d/khannanova.conf
+      
+      
+    - name: create a directory for ngnix
+      file:
+        path: /var/www/html/khannanova
+        state: directory
+        mode: '0777'
+      
+        
+    - name: copy server files
+      copy:
+        src: nginx/index.html
+        dest: /var/www/html/khannanova/index.html
+      
+      
+    - block: #CentOs
+      - name: install nginx
+        yum: update_cache=yes name=nginx state=latest
+        when: "'nginx' not in ansible_facts.packages"
+        
+      - name: reload nginx conf
+        shell: nginx -s reload
+        when: "'nginx' in ansible_facts.services and ansible_facts.services['nginx'].state == 'running'"
+        
+      - name: start nginx
+        service: name=nginx state=started
+        when: "'nginx' not in ansible_facts.services or ansible_facts.services['nginx'].state != 'running'"
+      when: ansible_os_family == "RedHat"
+      
+      
+    - block: #Debian
+      - name: install nginx
+        apt: update_cache=yes name=nginx state=latest
+        environment: "{{proxy_env}}"
+        when: "'nginx' not in ansible_facts.packages"
+                
+      - name: reload nginx conf
+        shell: nginx -s reload
+        when: "'nginx' in ansible_facts.services and ansible_facts.services['nginx'].state == 'running'"
+        
+      - name: start nginx
+        service: name=nginx state=started
+        when: "'nginx' not in ansible_facts.services or ansible_facts.services['nginx'].state != 'running'"
+      when: ansible_os_family == "Debian"
+...
