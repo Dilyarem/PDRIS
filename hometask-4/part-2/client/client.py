@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 
 import urllib.request
+import argparse, sys
 
-fp = urllib.request.urlopen("http://server:1234/")
+parser=argparse.ArgumentParser()
+parser.add_argument('--outerServer')
+args=parser.parse_args()
+
+fp = urllib.request.urlopen("http://{}:1234/".format(args.outerServer))
 
 encodedContent = fp.read()
 decodedContent = encodedContent.decode("utf8")
