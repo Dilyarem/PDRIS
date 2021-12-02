@@ -7,7 +7,7 @@
     - name: system os detection 
       debug: var=ansible_os_family
       
-    - name: check packages
+    - name: gather package info
       package_facts:
       
     - block: # install python on centos
@@ -27,20 +27,16 @@
         apt: update_cache=yes name=python3-pip state=latest
         when: "'python3-pip' not in ansible_facts.packages"
       when: ansible_os_family == "Debian"
-      become: yes
       
     - block: # install requirements
       - name: install argparse
-        pip: executable=python3-pip name=argparse state=latest
-      
-        
+        pip: executable=pip3 name=argparse state=latest
         
     - name: delete a directory if it exists
       file:
         path: '{{proj_dir}}'
         state: absent 
-        
-      
+
     - name: create a directory
       file:
         path: '{{proj_dir}}'

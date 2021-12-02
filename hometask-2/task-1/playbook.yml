@@ -18,19 +18,16 @@
         src: nginx/nginx.conf
         dest: /etc/nginx/conf.d/khannanova.conf
       
-      
     - name: create a directory for ngnix
       file:
         path: /var/www/html/khannanova
         state: directory
         mode: '0777'
-      
-        
+         
     - name: copy server files
       copy:
         src: nginx/index.html
         dest: /var/www/html/khannanova/index.html
-      
       
     - block: #CentOs
       - name: install nginx
@@ -45,7 +42,6 @@
         service: name=nginx state=started
         when: "'nginx' not in ansible_facts.services or ansible_facts.services['nginx'].state != 'running'"
       when: ansible_os_family == "RedHat"
-      
       
     - block: #Debian
       - name: install nginx
