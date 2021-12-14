@@ -25,7 +25,7 @@
     - name: Copy libs
       copy:
         src: ./target/libs
-        dest: /home/mftiedu/khannanova-dr-3/libs
+        dest: /home/mftiedu/khannanova-dr-3
         directory_mode: yes        
     
     - name: Deploying Jar
