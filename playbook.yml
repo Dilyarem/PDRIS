@@ -1,0 +1,23 @@
+---
+
+- name: Some Java Application
+  hosts: all
+  become: yes
+  
+  tasks:    
+    - name: Creating directory
+      file:
+        path: /home/mftiedu/khannanova-dr/hometask-3
+        state: directory
+        mode: '0777'
+    
+    - name: Copying Jar
+      copy:
+        src: ./target/smart-home-1.0-SNAPSHOT.jar
+        dest: /home/mftiedu/khannanova-dr/hometask-3
+    
+    - name: Deploying Jar
+      become: yes
+      shell: cd /home/mftiedu/khannanova-dr/hometask-3 && java -jar smart-home-1.0-SNAPSHOT.jar 
+        
+...
