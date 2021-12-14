@@ -18,10 +18,10 @@
     
     - name: Copying Jar
       copy:
-        src: ./target/smart-home-1.0-SNAPSHOT.jar
+        src: ./target/jenkins-1.0-SNAPSHOT.jar
         dest: /home/mftiedu/khannanova-dr-3       
     
     - name: Deploying Jar
-      shell: cd /home/mftiedu/khannanova-dr-3 && java -jar smart-home-1.0-SNAPSHOT.jar 
+      shell: cd /home/mftiedu/khannanova-dr-3 && java -jar jenkins-1.0-SNAPSHOT.jar 
         
 ...
