@@ -15,9 +15,20 @@
       copy:
         src: ./target/smart-home-1.0-SNAPSHOT.jar
         dest: /home/mftiedu/khannanova-dr-3
+        
+    - name: Create a directory for libs
+      file:
+        path: /home/mftiedu/khannanova-dr-3/libs
+        state: directory
+        mode: '0777'
+      
+    - name: Copy libs
+      copy:
+        src: ./target/libs
+        dest: /home/mftiedu/khannanova-dr-3/libs
+        directory_mode: yes        
     
     - name: Deploying Jar
-      become: yes
       shell: cd /home/mftiedu/khannanova-dr-3 && java -jar smart-home-1.0-SNAPSHOT.jar 
         
 ...
