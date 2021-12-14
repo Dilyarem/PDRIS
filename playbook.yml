@@ -5,6 +5,11 @@
   become: yes
   
   tasks:    
+    - name: Вelete a directory if it exists
+      file:
+        path: /home/mftiedu/khannanova-dr-3
+        state: absent
+  
     - name: Creating directory
       file:
         path: /home/mftiedu/khannanova-dr-3
