@@ -1,5 +1,0 @@
----
-ansible_ssh_user: "mftiedu"
-ansible_ssh_pass: "cHONtic"
-ansible_sudo_pass: "cHONtic"
-...
