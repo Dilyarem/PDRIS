@@ -9,6 +9,15 @@
 
     <name>Maven Quick Start Archetype</name>
     <url>http://maven.apache.org</url>
+         
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+        <aspectj.version>1.9.6</aspectj.version>
+        <allure-junit4.version>2.16.1</allure-junit4.version>
+    </properties>
 
     <build>
         <plugins>
